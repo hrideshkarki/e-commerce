@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 align = "center">Login</h1>
+<form method="POST" align = "center" >
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.username(class='form-control', placeholder='Username') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.password(class='form-control', placeholder='Password') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.submit(class='btn btn-primary') }}
+    </div>
+</form>
+
+{% endblock %}

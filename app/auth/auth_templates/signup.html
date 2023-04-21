@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 align = "center">Sign Up</h1>
+<form method="POST" align = "center">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.first_name(class='form-control', placeholder='First Name') }}
+    </div>
+    
+    <div class="form-group">
+        {{ form.last_name(class='form-control', placeholder='Last Name') }}
+    </div>
+
+    <div class="form-group">
+    {{ form.username(class='form-control', placeholder='Username') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.email(class='form-control', placeholder='Email') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.password(class='form-control', placeholder='Password') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
+    </div>
+    
+    <div class="form-group">
+        {{ form.submit(class='btn btn-primary') }}
+    </div>
+</form>
+
+{% if account %}
+
+<h3>Congratulations {{ account['first_name'] }}! You have successfully created your account. Please login to start playing </h3>
+
+{% endif %}
+
+{% endblock %}
