@@ -1,0 +1,48 @@
+- A user should be able to sign up
+- A route that shows a list of all available products
+- When you click on a product it should be able to link to a route which shows a single product (with the information of the product you just clicked)
+- User should be able to add a product to their cart, but only if they are logged in
+- A route (cart) that shows a list of products you’ve added into your cart as well as the total of all the items in your cart
+- Add a route that, when clicked handles functionality that removes all items from your cart one time. Also create a button that, when pressed, it removes that specific product object from the cart.
+
+SIGNUP/LOGIN:
+- A user should be able to sign up
+- This is the same as the auth/ folder we have for the projects we've already done
+
+USER:
+maybe User has .is_admin boolean to check who is the admin, default=False
+
+AVAILABLE PRODUCTS:
+- A route that shows a list of all available products
+- Reference Feed from inclass notes
+
+PRODUCT:
+- When you click on a product it should be able to link to a route which shows a single product (with the information of the product you just clicked)
+- Reference Post from inclass notes
+
+ROUTE: add_to_cart -> create connection between Product and User (if current_user)
+- Reference Catch from Pokemon - JOIN table
+
+CART:
+- A route (cart) that shows a list of products you’ve added into your cart as well as the total of all the items in your cart
+- This is like the User page for Pokemon -> shows items
+- Products tied to User is the JOIN table named CART 
+- Total: loop through items.price in join.query(), create total
+            - after calculating total, save_to_db()
+
+Total is in User table 
+
+DELETE PRODUCTS:
+- Add a route that, when clicked handles functionality that removes all items from your cart one time. Also create a button that, when pressed, it removes that specific product object from the cart.
+- Referencing removing a post or removing a pokemon. 
+- Deleting all will be something like deleting the entire contents of the Products/User join table (cart)
+
+======= HOMEWORK ======
+
+We should have a shop blueprint:
+        that way we could just copy this entire folder and bring it into another project 
+        make sure you register the blueprint 
+
+maybe User has .is_admin boolean to check who is the admin, default=False
+
+going above and beyond: building out admin side, so you have a create_product route
