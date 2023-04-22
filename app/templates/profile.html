@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 align = "center">Profile</h1>
+<div align = "center">
+    <span>Name: {{current_user.first_name}} {{current_user.last_name}} </span><br>
+    <span>Username: {{current_user.username}} </span><br>
+    <span>Email: {{current_user.email}} </span><br>
+    <button type="button" onclick="window.location.href='/edit-profile'"class="btn btn-success">Edit Profile</button>
+</div>
+
+{% endblock %}

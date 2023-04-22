@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
 # import requests
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -19,12 +20,16 @@ class User(db.Model, UserMixin):
         self.last_name = last_name
         self.username = username
         self.email = email
-        self.password = password
+        self.password = generate_password_hash(password)
 
-    def saveToDB(self):
+    def save_to_db(self):
         db.session.add(self)
         db.session.commit()
 
-    def saveChanges(self):
+    def save_changes(self):
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
 

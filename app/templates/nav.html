@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
+  <div class="nav-items-shown">
+    <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/placehold.png') }}" width="30" height="30" class="d-inline-block align-top" alt=""><span>E-Commerce Site</span></a>
+    {% if current_user.is_authenticated %}
+    <div class="user-profile-icons">
+      <!--We will put a profile image here once we implement that-->
+      <a class="user-link nav-link active" id="user-greeting" href="/profile">{{current_user.first_name.title()}}</a>
+    </div>
+    {% else %}
+      <a class="guest-link nav-link active" id="user-greeting">Guest</a>
+    {% endif%}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link active">Hello, Guest</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign Up</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+
