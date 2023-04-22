@@ -55,10 +55,11 @@ def edit_profile():
 
 
 import requests as r
-#import os
+import os
 import json
-#PRODUCT_API_KEY = os.environ.get('NEWS_API_KEY')
+PRODUCT_API_KEY = os.environ.get('PRODUCT_API_KEY')
 
+#@app.route('/products/<string:ASIN>')
 @app.route('/products')
 def products_page():
     # note at end of this we add the pageSize=20
@@ -66,25 +67,32 @@ def products_page():
     params = {
         'api_key': 'C8FA965A8F6D4DDCB9FAC8BC1A5A2B52',
         'type': 'product',
-        'asin': 'B000YDDF6O',
+        'asin': 'B0BD95Y2XS',
         'amazon_domain': 'amazon.com'
     }
 
 
     # make the http GET request to Rainforest API
     api_result = r.get('https://api.rainforestapi.com/request', params)
+    #api_result = r.get('https://api.rainforestapi.com/request?api_key={PRODUCT_API_KEY}&type=product&asin=B0BD95Y2XS&amazon_domain=amazon.com')
+
+    #api_result = r.get('https://api.rainforestapi.com/request?api_key={PRODUCT_API_KEY}&amazon_domain=amazon.com&asin=B0BD95Y2XS&type=product')
+
 
     # print the JSON response from Rainforest API
-    print(json.dumps(api_result.json()))
+    #print(json.dumps(api_result.json()))
+
+    print(api_result.json())
 
     data = api_result.json()
 
     products = []
     # in the JSON it says that status should be 'ok', written in the JSON file
-    if data['request_info']['success'] == 'true':
-        products = data['product']['title']
-        print(f"THE PRODUCTS ARE:{products}")
+    if data["request_info"]["success"] == True:
+        products = data["product"]
+        #print(f"THE PRODUCTS ARE:{products}")
+        #print(f"The product title is {products}")
 
-    return render_template('products.html', products=products)
+    return render_template('products.html', p=products)
 
 

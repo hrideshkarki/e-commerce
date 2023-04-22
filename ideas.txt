@@ -70,3 +70,16 @@ ApiGenius_API_Key: abdd078fd50440f0826ad2da6ecc9b3f
 
 
 <a href="{{p.url}}" class="btn btn-primary"></a>
+
+
+        <h5 class="card-title">{{p.title}}</h5>
+        <p class="card-text">{{p.description}}</p>
+<img src="{{p['main_image']['link']}}" class="card-img-top" alt="...">
+
+{% for p in products %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      
+    </div>
+  </div>
+{% endfor %}
