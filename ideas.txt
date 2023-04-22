@@ -46,3 +46,24 @@ We should have a shop blueprint:
 maybe User has .is_admin boolean to check who is the admin, default=False
 
 going above and beyond: building out admin side, so you have a create_product route
+
+
+https://api.apigenius.io/amazon/amz-get?job_id=t6msDt5O3D-3
+
+JOB ID: t6msDt5O3D-3
+
+ASIN: B076H3SRXG
+
+GET https://api.apigenius.io/amazon/amz-get?job_id=t6msDt5O3D-3 HTTP/1.1
+Host: api.apigenius.io
+ApiGenius_API_Key: abdd078fd50440f0826ad2da6ecc9b3f
+
+================
+{
+  "success": true,
+  "status": 200,
+  "type": "product_data",
+  "identifier": "+B073DYJ2V1",
+  "job_id": "tEfQUtttF6bv"
+}
+

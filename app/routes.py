@@ -5,6 +5,9 @@ from app import app
 from werkzeug.security import generate_password_hash
 from .forms import  EditProfile
 
+import requests as r
+from flask import jsonify
+
 @app.route('/')
 def home_page():
     return render_template('index.html')
@@ -39,3 +42,13 @@ def edit_profile():
         
     elif request.method == "GET":
         return render_template('edit-profile.html', form = form)
+    
+@app.route('/api/<string:product_name>')
+def get_product_info(product_name):
+    # Your code to retrieve product info from the Genius API goes here
+    response = r.get('https://api.genius.com/search', headers={'Authorization': 'Bearer PRODUCT_API_KEY'}, params={'q': product_name})
+    product_info = response.json()
+    
+    # instead of data = response.json()
+    print(jsonify(product_info))
+    return jsonify(product_info)

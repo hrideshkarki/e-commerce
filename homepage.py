@@ -4,8 +4,8 @@ print('this is working')
 import requests as r
 from flask import jsonify
 # Not sure if we need these:
-#import os
-#PRODUCT_API_KEY  = os.environ.get('PRODUCT_API_KEY ')
+import os
+PRODUCT_API_KEY  = os.environ.get('PRODUCT_API_KEY ')
 
 # @app.route('/products')
 # def products_page():
@@ -18,7 +18,7 @@ from flask import jsonify
 #     # in the JSON it says that status should be 'ok', written in the JSON file
 #     if data['status'] == 'ok':
 #         articles = data['articles']
-#     return render_template('news.html', articles=articles)
+#     return render_template('products.html', articles=articles)
 
 # in the API blueprint
 @app.route('/api/<string:product_name>')
