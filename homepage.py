@@ -29,3 +29,21 @@ def get_product_info(product_name):
     
     # instead of data = response.json()
     return jsonify(product_info)
+
+#this is the API
+
+import requests
+import json
+
+# set up the request parameters
+params = {
+  'api_key': 'C8FA965A8F6D4DDCB9FAC8BC1A5A2B52',
+  'type': 'bestsellers',
+  'url': 'https://www.amazon.com/s/zgbs/pc/516866'
+}
+
+# make the http GET request to Rainforest API
+api_result = requests.get('https://api.rainforestapi.com/request', params)
+
+# print the JSON response from Rainforest API
+print(json.dumps(api_result.json()))
