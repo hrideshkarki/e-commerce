@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 align = "center">Add Product</h1>
+<form method="POST" align = "center">
+    {{ form.hidden_tag() }}
+    {{ form.ASIN(class='form-control', placeholder='ASIN') }}
+    {{ form.submit(class='btn btn-primary') }}
+</form>
+
+
+{% endblock %}

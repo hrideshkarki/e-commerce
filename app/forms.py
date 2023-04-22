@@ -10,3 +10,7 @@ class EditProfile(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField()
+
+class AddProduct(FlaskForm):
+    ASIN = StringField('ASIN', validators=[DataRequired()])
+    submit = SubmitField()
