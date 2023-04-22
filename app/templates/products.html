@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Products Page</h1>
+
+{% for p in products %}
+<div class="card" style="width: 18rem;">
+    <img src="{{p['main_image']['link']}}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{p['title']}}</h5>
+        <p class="card-text">{{p['description']}}</p>
+      
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
