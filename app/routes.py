@@ -48,40 +48,9 @@ def edit_profile():
 #@app.route('/add-product/<string:ASIN>')
 @app.route('/products')
 def products_page():
-    # # note at end of this we add the pageSize=20
-    
-    # params = {
-    #     'api_key': 'C8FA965A8F6D4DDCB9FAC8BC1A5A2B52',
-    #     'type': 'product',
-    #     'amazon_domain': 'amazon.com'
-    # }
-
-    # params['asin']= 'B0BD95Y2XS'
-    # #params['asin']= ASIN
-
-    # # make the http GET request to Rainforest API
-    # api_result = r.get('https://api.rainforestapi.com/request', params)
-    # #api_result = r.get('https://api.rainforestapi.com/request?api_key={PRODUCT_API_KEY}&type=product&asin=B0BD95Y2XS&amazon_domain=amazon.com')
-
-    # #api_result = r.get('https://api.rainforestapi.com/request?api_key={PRODUCT_API_KEY}&amazon_domain=amazon.com&asin=B0BD95Y2XS&type=product')
-
-
-    # # print the JSON response from Rainforest API
-    # #print(json.dumps(api_result.json()))
-
-    # print(api_result.json())
-
-    # data = api_result.json()
-
-    # products = []
-    # # in the JSON it says that status should be 'ok', written in the JSON file
-    # if data["request_info"]["success"] == True:
-    #     products = data["product"]
-    #     #print(f"THE PRODUCTS ARE:{products}")
-    #     #print(f"The product title is {products}")
-
-    # return render_template('products.html', p=products)
-    return render_template('products.html')
+    products = Product.query.all()
+   
+    return render_template('products.html', products=products)
 
 @app.route('/product/<int:id>')
 def single_product(id):
@@ -123,7 +92,7 @@ def add_product(ASIN):
         new_product = Product(title, price, image, department, amazon_link, description, rating)
         new_product.save_to_db()
                                             # fix this, fix HTML
-        return render_template('single-product.html', p=new_product)
+        return redirect (url_for('admin_add_product'))
     else:
         flash ('unable to add product', 'danger')
         return render_template('add-product.html')
@@ -144,3 +113,15 @@ def admin_add_product():
     elif request.method == "GET":
         return render_template('add-product.html', form = form)
     return render_template('add-product.html')
+
+@app.route('/add-to-cart/<int:id>', methods = ["GET", "POST"])
+def add_to_cart(id):
+    product = Product.query.get(id)
+    if product:
+        current_user.add_to_cart(product)
+    else: 
+        flash("Sold Out!", "danger")
+    
+    return render_template('cart.html', p=product)
+
+    

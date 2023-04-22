@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable = False, unique = True)
     password = db.Column(db.String, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
+    # in_cart = db.relationship("Product", secondary = "cart")
+    products = db.relationship('Product', secondary = "cart", backref='user', lazy=True)
 
     def __init__(self, first_name, last_name, username, email, password):
         self.first_name = first_name
@@ -22,6 +24,24 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = generate_password_hash(password)
 
+    def add_to_cart(self, product):
+        self.products.append(product) 
+        db.session.commit()
+
+    # def add_to_cart(self, product):
+    # if product not in self.products:
+    #     self.products.append(product) 
+    #     db.session.commit()
+
+
+    def remove_from_cart(self, product):
+        self.products.remove(product) 
+        db.session.commit()
+
+    def empty_cart(self):
+        self.products.delete() 
+        db.session.commit()
+    
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -36,7 +56,7 @@ class User(db.Model, UserMixin):
 class Product(db.Model, UserMixin):
     # id, title, price, image, department=categories[0], link (to amazon), description, rating
     id = db.Column(db.Integer, primary_key=True)
-    title= db.Column(db.String(150), unique = True, nullable = False)
+    title= db.Column(db.String(300), unique = True, nullable = False)
     price = db.Column(db.Float, nullable = False)
     image = db.Column(db.String, nullable = False, unique = True)
     department = db.Column(db.String(30), nullable = False)
@@ -44,6 +64,10 @@ class Product(db.Model, UserMixin):
     description = db.Column(db.String, nullable = False)
     rating = db.Column(db.Float, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
+    # in_cart = db.relationship("User", secondary = "cart")
+    users = db.relationship('User', secondary="cart", backref='products_in_cart', lazy=True)
+
+    
 
     def __init__(self, title, price, image, department, amazon_link, description, rating):
         self.title = title
@@ -65,4 +89,7 @@ class Product(db.Model, UserMixin):
         db.session.delete(self)
         db.session.commit()
 
-
+cart = db.Table('cart',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True)
+)
