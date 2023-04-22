@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 align = "center">Edit Profile</h1>
+<form method="POST" align = "center">
+    {{ form.hidden_tag() }}
+
+    {{ form.first_name(class='form-control', placeholder='First Name', value=current_user.first_name) }}
+    {{ form.last_name(class='form-control', placeholder='Last Name', value=current_user.last_name) }}
+    {{ form.username(class='form-control', placeholder='Username', value=current_user.username) }}
+    {{ form.email(class='form-control', placeholder='Email', value=current_user.email) }}
+    {{ form.password(class='form-control', placeholder='Password') }}
+    {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
+    {{ form.submit(class='btn btn-primary') }}
+</form>
+
+
+{% endblock %}

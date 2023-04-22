@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="container home-container">
+    {% if current_user.is_authenticated %}
+    <h1>This will be the homepage if we are logged in</h1>
+    {% else %}
+    <h1>This will be the homepage for Guests</h1>
+    <h6>Maybe some other text</h6>
+    <button type="button" onclick="window.location.href='/signup'"class="btn btn-success">Sign up</button>
+    <button type="button" onclick="window.location.href='/login'"class="btn btn-success">Login</button>
+    {% endif %}
+</div>
+{% endblock %}
