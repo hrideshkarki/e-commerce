@@ -13,7 +13,8 @@ PRODUCT_API_KEY = os.environ.get('PRODUCT_API_KEY')
 
 @app.route('/')
 def home_page():
-    return render_template('index.html')
+    products = Product.query.all()
+    return render_template('index.html', products=products)
 
 @app.route('/profile', methods = ["GET", "POST"])
 def profile():

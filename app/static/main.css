@@ -2,12 +2,41 @@
   
  /* Center align the form */
 
- /* body {
-    background-image: url('/static/img/1.jpg');
+  .content-container {
+    /*background-image: url('/static/img/1.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-} */
+    background-repeat: no-repeat;*/
+    height: 100vh; /* This gets footer at the bottom of the page*/
+    position: relative;
+    width: 100%;
+} 
+
+footer {
+  width: 100%;
+  padding-top: 10px;
+  position: absolute;
+  text-align: center;
+}
+
+/* navbar brand image*/
+.navbar-brand img{
+  border-radius: 50% 50%;
+}
+
+/* carousel*/
+#carouselExampleControls {
+  height: 40%;
+}
+
+/* images in carousel*/
+.d-block {
+  height: 350px;
+}
+
+/* Just putting it like this for now so we can see them */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  border: solid 2px;
+}
 
 form {
     display: flex;
@@ -53,7 +82,7 @@ form {
   /* login/signup button */
   .btn-primary {
     width: 19vw; 
-    height: 2.3vw;
+    /*height: 2.3vw;*/
     display: inline-block;
     font-weight: 400;
     color: #fff;
@@ -87,6 +116,15 @@ form {
 
   h1 {
     color: blue;
+  }
+
+  .btn { 
+    font-weight: 400;
+  }
+
+  .btn-success:hover {
+    background-color: #1a106a;
+    border-color: #180e73;
   }
 
 
