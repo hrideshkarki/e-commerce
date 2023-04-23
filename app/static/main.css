@@ -240,17 +240,33 @@ form {
 
 /* product page */
 
+.card{
+    height: 100%;
+}
+
+a{
+    color: #231F20;
+  }
+
+.card-text{
+    justify-content: center;
+
+}
+
 .card-img-top {
     height: 20vw; /* height of product */
     object-fit: cover;
   }
-  
-  .card-text {
-    margin-bottom: 0; /* Remove the default margin */
-  }
-  
-  .card-text a {
+
+  .card-text:hover {
     text-decoration: none;
+    color: #BB4430;
+  }
+
+  .card-title:hover {
+    text-decoration: none;
+    color: #BB4430;
+    transform: translateY(-5px);
   }
   
 /* footer */
