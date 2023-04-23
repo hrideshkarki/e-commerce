@@ -150,3 +150,27 @@ form {
     text-align: justify;
     /* text-align: right; */
 }
+
+
+/* product page */
+
+.card-img-top {
+    height: 20vw; /* height of product */
+    object-fit: cover;
+  }
+  
+  .card-text {
+    margin-bottom: 0; /* Remove the default margin */
+  }
+  
+  .card-text a {
+    text-decoration: none;
+  }
+  
+/* footer */
+
+  .footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+  }
+  
