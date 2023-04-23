@@ -2,15 +2,33 @@
 
 {% block content %}
 <h1>Products Page</h1>
-
+<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    View By Department
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="/products">All Departments</a></li>
+    {% for dept in departments_list%}
+    <li><a class="dropdown-item" href="/products/{{dept}}">{{dept}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
   {% for p in products %}
   <a class="card" href=/product/{{p.id}} style="width: 18rem;"> 
     <img src="{{p.image}}" class="card-img-top" alt="...">
     <div class="card-body">
       <p class="card-text">{{p.title}}</p>
       <p class="card-text"><b>${{p.price}}</b></p>
+      {% if current_user.is_admin %}
+      <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
+        <a class="card-text btn btn-warning" href="/remove-item/{{p.id}}">Remove item from store</a>
+      {% elif p.in_cart %}
+          <a class="card-text" href="/remove-from-cart/{{p.id}}">Remove from cart</a>
+      {% else %}
+          <a class="card-text" href="/add-to-cart/{{ p.id }}">Add to cart</a>   
+      {% endif %}   
     </div>
   </a>
 
-  {% endfor %}a
+  {% endfor %}
 {% endblock %}

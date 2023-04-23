@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit Product</h1>
+
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      {% if current_user.is_admin %}
+      <!--We can also have an image picker to edit the image-->
+        <img src="{{p.image}}" class="card-img-top" alt="...">
+        <form method="POST" align = "center">
+        <div class="form-group">
+          {{ form.hidden_tag() }}
+          <label for="exampleFormControlTextarea1">Title:</label>
+          {{ form.title(class='form-control', placeholder='Title', value=p.title) }}
+          <label for="exampleFormControlTextarea1">Description:</label>
+          {{ form.description(class='form-control form-control-lg', placeholder='Description', value=p.description) }}
+          <label for="exampleFormControlTextarea1">Price:</label>
+          {{ form.price(class='form-control form-control-lg', placeholder='Price', value=p.price) }}
+          <label for="exampleFormControlTextarea1">Department:</label>
+          {{ form.department(class='form-control form-control-lg', placeholder='Department', value=p.department) }}
+          <label for="exampleFormControlTextarea1">Rating: {{p.rating}}</label>
+          <a class="card-text" href="{{p.amazon_link}}">Amazon Link</a>
+          {{ form.submit(class='btn btn-primary') }}
+        </form>
+        <a class="card-text btn btn-warning" href="/remove-item/{{p.id}}">Remove item from store</a>
+        {% endif %}     
+    </div>
+  </div>
+
+{% endblock %}

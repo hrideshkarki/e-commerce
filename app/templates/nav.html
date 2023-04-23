@@ -16,14 +16,29 @@
   </div>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        {% if current_user.is_authenticated %}
+        {% if current_user.is_authenticated and not current_user.is_admin %}
           <li class="nav-item">
             <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
           </li> 
           <li class="nav-item">
             <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
           <li class="nav-item">
+            <a class="nav-link" href="/products">Products</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">My Cart</a>
+          <li class="nav-item">
             <a class="nav-link" href="/logout">Log Out</a>
+          <!--Here is where we will have an if-statement for current user . is admin-->
+          {% elif current_user.is_admin %}
+          <li class="nav-item">
+            <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Products</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/add-product">Add Product</a>
+          <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
           </li>
         {% else %}
           <li class="nav-item">
