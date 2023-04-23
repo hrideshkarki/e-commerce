@@ -6,7 +6,7 @@
     /*background-image: url('/static/img/1.jpg');
     background-size: cover;
     background-repeat: no-repeat;*/
-    height: 100vh; /* This gets footer at the bottom of the page*/
+    height: 100%; /* This gets footer at the bottom of the page*/
     position: relative;
     width: 100%;
 } 

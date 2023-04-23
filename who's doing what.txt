@@ -1,0 +1,14 @@
+Hridesh:
+login.html
+signup.html
+products.html
+single-product.html
+cart.html
+
+Simon:
+index.html
+nav.html
+edit-product.html
+edit-profile.html
+profile.html
+add-product.html
