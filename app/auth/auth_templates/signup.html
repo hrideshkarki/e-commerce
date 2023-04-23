@@ -6,12 +6,12 @@
 
     body {
         background-image: url('/static/img/1.jpg');
-        background-size: cover;
+        background-size:1000px;
         background-repeat: no-repeat;
         height: 100vh;
+        background-position: center;
     }
     </style>
-    
 
 
 <div class="signup-box">
@@ -48,15 +48,11 @@
 
         <div class="form-group">
             {{ form.submit(class='btn btn-primary') }}
-            <!-- <a type="submit" class="btn btn-primary" href="#">Sign up</a>  -->
+
+            <!-- <a type="submit" class="btn btn-primary" href="/login">Sign up</a>  -->
             <!-- we need to change the redirect link -->
         </div>
     </form>
 </div>
-{% if account %}
-
-<h3>Congratulations {{ account['first_name'] }}! You have successfully created your account. Please login to start playing </h3>
-
-{% endif %}
 
 {% endblock %}

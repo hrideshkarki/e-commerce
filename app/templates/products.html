@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h1>Products Page</h1>
   <div class="dropdown">
     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
       View By Department
@@ -14,6 +13,7 @@
       {% endfor %}
     </ul>
   </div>
+  <br>    
   <div class="row justify-content-center align-items-stretch">
     {% for p in products %}
     <div class="col-md-4 mb-3">
@@ -21,11 +21,10 @@
         <a href="/product/{{p.id}}"> 
           <img src="{{p.image}}" class="card-img-top" alt="...">
         </a>
-        <div class="card-body">
-          <a class="card-title"  href = "/product/{{p.id}}" style="color: black">{{p.title}}</a>
-          <br>
-          <br>
-          <p  class="card-text text-center" href = "/product/{{p.id}}">${{p.price}}</p>
+          <div class="card-body position-relative">
+            <a class="card-title" href="/product/{{p.id}}" style="color: black">{{p.title}}</a><br>
+          </div>
+            <a class="card-text1 text-center" href="/product/{{p.id}}">${{p.price}}</a>
           {% if p.rating.int %}
           <p class="card-text text-center">
             Rating:
@@ -38,7 +37,6 @@
           </p>
           {% endif %}
           <p class="card-text text-center"><small class="text-muted">Delivery by tomorrow evening!{{tomorrow_date}}</small></p>
-        </div>
       </div>
     </div>
     {% endfor %}

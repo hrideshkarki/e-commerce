@@ -92,3 +92,30 @@ cart = db.Table('cart',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True)
 )
+
+
+class Checkout(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    name= db.Column(db.String(30), unique = True, nullable = False)
+    email = db.Column(db.String(100), nullable = False)
+    address = db.Column(db.String(300), nullable = False, unique = True)
+    card_number = db.Column(db.String(10), nullable = False)
+    expiration_date = db.Column(db.Integer, nullable = False)
+    cvv = db.Column(db.String(3), nullable = False)
+    date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
+
+    
+    def __init__(self, name, email, address, card_number, expiration_date, cvv):
+        self.name = name
+        self.email = email
+        self.address = address
+        self.card_number = card_number
+        self.expiration_date = expiration_date
+        self.cvv = cvv
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def save_changes(self):
+        db.session.commit()

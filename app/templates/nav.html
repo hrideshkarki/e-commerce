@@ -5,7 +5,7 @@
       <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
       <a class="nav-link" href="/products">Products</a>
       <div class="shopping-cart">
-        <a class="nav-link nav-cart" href="#"><i class="fas fa-shopping-cart"></i></a>
+        <a class="nav-link nav-cart" href="/cart"><i class="fas fa-shopping-cart"></i></a>
         {%if current_user.products%}
         <span class="items-in-cart">{{current_user.products|length}}</span>
         {%endif%}

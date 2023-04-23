@@ -3,7 +3,7 @@ from .models import Product, User
 from flask_login import current_user,login_user, logout_user, login_required
 from app import app
 from werkzeug.security import generate_password_hash
-from .forms import AddProduct, EditProfile, EditProduct
+from .forms import AddProduct, CheckoutForm, EditProfile, EditProduct
 import os
 import requests as r
 from flask import jsonify
@@ -217,4 +217,9 @@ def cart():
 def empty_cart():
     current_user.empty_cart()
     return render_template('cart.html', cart=current_user.products, total=0)
+
+@app.route('/checkout')
+def checkout():
+    form = CheckoutForm()
+    return render_template('checkout.html', form=form)
    

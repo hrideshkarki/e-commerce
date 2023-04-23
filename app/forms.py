@@ -21,3 +21,12 @@ class EditProduct(FlaskForm):
     price = DecimalField('Price', places=2, validators=[DataRequired()])
     department = StringField('Department', validators=[DataRequired()])
     submit = SubmitField('Submit Changes')
+
+class CheckoutForm(FlaskForm):
+    name = StringField('name', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    card_number = StringField('Card Number', validators=[DataRequired()])
+    expiration_date = PasswordField('Expiration Date', validators=[DataRequired()])
+    cvv = PasswordField('CVV', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField()
