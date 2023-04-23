@@ -23,6 +23,51 @@ footer {
   border-radius: 50% 50%;
 }
 
+.shopping-cart {
+  display:flex;
+}
+
+.nav-cart {
+  padding-right:0;
+}
+
+.items-in-cart {
+  font-size:8px;
+  background-color: #F3DFA2;
+  height:10px;
+  width:10px;
+  text-align:center;
+  font-weight:800;
+  border-radius: 50% 50%;
+  margin-top:6px;
+  margin-left:-4px;
+}
+
+/* logo */
+.navbar-brand img{
+  margin-right:5px;
+}
+
+.navbar-brand {
+  color: #EFE6DD;
+}
+
+.navbar-brand:hover {
+  color: #ffffff;
+}
+
+nav {
+  background-color:#231F20
+}
+
+nav a {
+  color:#BB4430;
+}
+
+nav a:hover {
+  color:#ee654d;
+}
+
 /* carousel*/
 #carouselExampleControls {
   height: 40%;
@@ -34,8 +79,12 @@ footer {
 }
 
 /* Just putting it like this for now so we can see them */
-.carousel-control-prev-icon, .carousel-control-next-icon {
-  border: solid 2px;
+.carousel-control-next, .carousel-control-prev {
+  opacity:0;
+}
+
+.carousel-control-next:hover, .carousel-control-prev:hover {
+  opacity:0.5;
 }
 
 form {
@@ -160,7 +209,6 @@ form {
         opacity: 0;
     }
 }
-
 
 .signup-box {
     background-color: #e0dfdd;

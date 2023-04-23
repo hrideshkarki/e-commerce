@@ -1,67 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
-      <div class="nav-items-shown">
-        <a class="navbar-brand d-inline-block align-top" href="/"><img src="{{ url_for('static', filename='img/1.jpg') }}" width="30" height="30" alt=""><span>E-Commerce Site</span></a>
-        <!-- we can change the image later - h -->
-        {% if current_user.is_authenticated %}
-        <div class="user-profile-icons">
-          <!--We will put a profile image here once we implement that-->
-          <a class="user-link nav-link active" id="user-greeting" href="/profile">{{current_user.first_name.title()}}</a>
-        </div>
-        {% else %}
-          <a class="guest-link nav-link active" id="user-greeting">Guest</a>
-        {% endif%}
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand d-inline-block align-top" href="/"><img src="{{ url_for('static', filename='img/1.jpg') }}" width="30" height="30" alt=""><span>E-Commerce Site</span></a>
+    {% if current_user.is_authenticated and not current_user.is_admin %}
+      <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
+      <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/products">Products</a>
+      <div class="shopping-cart">
+        <a class="nav-link nav-cart" href="#"><i class="fas fa-shopping-cart"></i></a>
+        {%if current_user.products%}
+        <span class="items-in-cart">{{current_user.products|length}}</span>
+        {%endif%}
       </div>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            {% if current_user.is_authenticated and not current_user.is_admin %}
-              <li class="nav-item">
-                <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-              <li class="nav-item">
-                <a class="nav-link" href="/products">Products</a>
-              <li class="nav-item">
-                <a class="nav-link" href="/cart">My Cart</a>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Log Out</a>
-              <!--Here is where we will have an if-statement for current user . is admin-->
-              {% elif current_user.is_admin %}
-              <li class="nav-item">
-                <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="/products">Products</a>
-              <li class="nav-item">
-                <a class="nav-link" href="/add-product">Add Product</a>
-              <li class="nav-item">
-              <a class="nav-link" href="/logout">Log Out</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link active">Hello, Guest</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Log In</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/signup">Sign Up</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </nav>
+      <a class="nav-link" href="/logout">Log Out</a>
+    <!--Here is where we will have an if-statement for current user . is admin-->
+    {% elif current_user.is_admin %}
+      <a class="nav-link hello-user-link" href="/profile" >Hello, {{ current_user.first_name.title() }}</a>
+      <a class="nav-link" href="/products">Products</a>
+      <a class="nav-link" href="/add-product">Add Product</a>
+      <a class="nav-link" href="/logout">Log Out</a>
+    {% else %}
+      <a class="nav-link active">Hello, Guest</a>
+      <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/login">Log In</a>
+      <a class="nav-link" href="/signup">Sign Up</a>
+    {% endif %}
+  </nav>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
