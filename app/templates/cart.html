@@ -1,1 +1,22 @@
-cart
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>My Cart</h1>
+
+    {% if cart|length == 0 %}
+    <h6>Your cart is empty.</h6>
+    {% else %}
+        {% for item in cart %}
+            <a class="card" href=/product/{{item.id}} style="width: 18rem;"> 
+                <img src="{{item.image}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <p class="card-text">{{item.title}}</p>
+                <p class="card-text"><b>${{item.price}}</b></p>
+                <a href="/remove-from-cart/{{item.id}}" class="btn btn-warning">Remove from cart</a>
+                </div>
+            </a>
+        {% endfor %}
+        <a href="/empty-cart" class="btn btn-danger">Empty cart</a>
+        <h5>Your total is: ${{total}}</h5>
+    {% endif %}
+{% endblock %}

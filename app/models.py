@@ -14,8 +14,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable = False, unique = True)
     password = db.Column(db.String, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
+    is_admin = db.Column(db.Boolean, default=False)
     # in_cart = db.relationship("Product", secondary = "cart")
-    products = db.relationship('Product', secondary = "cart", backref='user', lazy=True)
+    
+    # I think we want something more like this
+    # products = db.relationship('Product', secondary = "cart", back_populates='cart_owner', lazy=True, uselist=False)
+
+    products = db.relationship('Product', secondary = 'cart', backref='cart_owner', lazy=True)
 
     def __init__(self, first_name, last_name, username, email, password):
         self.first_name = first_name
@@ -28,18 +33,12 @@ class User(db.Model, UserMixin):
         self.products.append(product) 
         db.session.commit()
 
-    # def add_to_cart(self, product):
-    # if product not in self.products:
-    #     self.products.append(product) 
-    #     db.session.commit()
-
-
     def remove_from_cart(self, product):
         self.products.remove(product) 
         db.session.commit()
 
     def empty_cart(self):
-        self.products.delete() 
+        self.products.clear() 
         db.session.commit()
     
     def save_to_db(self):
@@ -64,8 +63,8 @@ class Product(db.Model, UserMixin):
     description = db.Column(db.String, nullable = False)
     rating = db.Column(db.Float, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
-    # in_cart = db.relationship("User", secondary = "cart")
-    users = db.relationship('User', secondary="cart", backref='products_in_cart', lazy=True)
+    in_cart = db.relationship("User", secondary = "cart", overlaps="cart_owner,products")
+    #cart_owner = db.relationship('User', secondary="cart", back_populates='products_in_cart', lazy=True)
 
     
 

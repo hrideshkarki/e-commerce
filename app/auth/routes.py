@@ -3,7 +3,7 @@ from .forms import LoginForm, SignUpForm
 from ..models import User
 from flask_login import current_user,login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
-# from email_validator import validate_email
+from email_validator import validate_email
 
 auth = Blueprint('auth', __name__, template_folder='auth_templates')
 
@@ -17,13 +17,17 @@ def signup_page():
     
     if request.method == 'POST':
         if form.validate():
-            first_name = form.first_name.data.title()
-            last_name = form.last_name.data.title()
-            username = form.username.data
-            email = form.email.data
+            first_name = form.first_name.data.title().strip()
+            last_name = form.last_name.data.title().strip()
+            username = form.username.data.strip()
+            email = form.email.data.strip()
             password = form.password.data
 
             is_new_account = True
+
+            if first_name == "" or last_name == "" or username == "":
+                flash('You must enter something for every field. Spaces are not accepted as valid entries', 'danger')
+                return render_template('signup.html', form = form)
 
             # Make sure the user is not in the db yet
             try:

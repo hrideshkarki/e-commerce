@@ -6,16 +6,19 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <img src="{{p.image}}" class="card-img-top" alt="...">
-        <h5 class="card-title">Title: {{p.title}}</h5>
+        <h5 class="card-title">{{p.title}}</h5>
         <p class="card-text">Description: {{p.description}}</p>
-        <p class="card-text">Price: {{p.price}}</p>
+        <p class="card-text">Price: ${{p.price}}</p>
         <p class="card-text">Department: {{p.department}}</p>
         <p class="card-text">Rating: {{p.rating}}</p>
         <a class="card-text" href="{{p.amazon_link}}">Amazon Link</a>
-        {% if p.in_cart %}
-          <a class="card-text" href="#">Added to cart</a>
+        {% if current_user.is_admin %}
+        <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
+        <a class="card-text btn btn-warning" href="/remove-item/{{p.id}}">Remove item from store</a>
+        {% elif p.in_cart %}
+          <a class="card-text btn btn-warning" href="/remove-from-cart/{{p.id}}">Remove from cart</a>
         {% else %}
-          <a class="card-text" href="/add-to-cart/{{ p.id }}">Add to cart</a>   
+          <a class="card-text btn btn-primary" href="/add-to-cart/{{ p.id }}">Add to cart</a>   
         {% endif %}     
     </div>
   </div>
