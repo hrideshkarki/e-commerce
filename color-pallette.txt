@@ -1,0 +1,5 @@
+#231F20 - black
+#BB4430 - red
+#7EBDC2 - blue
+#F3DFA2 - yellow
+#EFE6DD - white-ish
