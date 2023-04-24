@@ -60,7 +60,12 @@ class Product(db.Model, UserMixin):
     image = db.Column(db.String, nullable = False, unique = True)
     department = db.Column(db.String(30), nullable = False)
     amazon_link = db.Column(db.String, nullable = False)
-    description = db.Column(db.String, nullable = False)
+
+    # From Simon- had I realized the descriptions were surrounded by "," then I 
+    # would make this a list and split the description at "," and print the 
+    # bulleted list out as a ul with li objects for each item in the list. 
+    # However our free trial has run out so we can't add any objects.
+    description = db.Column(db.String, nullable = False) 
     rating = db.Column(db.Float, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
     in_cart = db.relationship("User", secondary = "cart", overlaps="cart_owner,products")

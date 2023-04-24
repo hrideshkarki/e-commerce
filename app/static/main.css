@@ -457,7 +457,7 @@ margin-right: 20px;
   "#edit-email-title #edit-email"
   "#edit-password-title #edit-password"
   "#edit-confirm-password-title #edit-confirm-password"
-  ".edit-submit-btn .edit-submit-btn"
+  ".edit-submit-btn1 .edit-submit-btn2"
   ; 
   background-color:#f2f2f2;
   padding: 15px;
@@ -465,20 +465,34 @@ margin-right: 20px;
   box-shadow: 1px 1px 1px rgb(207, 207, 207);
 }
 
-.edit-submit-btn {
-  justify-self:center;
-  grid-column: span 2;
+/* Form input in edit profile */
+.edit-profile-form .form-control {
+  height: 26px;
+  width: 260px;
+}
+
+/* Subtitles in edit profile */
+.edit-profile-form span {
+  text-align:right;
+  margin-right: 25px;
+}
+
+.edit-submit-btn1,.edit-submit-btn2 {
+  justify-self: center;
   box-shadow: 1px 1px 2px rgb(119, 115, 115);
 }
 
+.edit-submit-btn2 {
+  background-color:rgb(19, 143, 170);
+}
 
 .button-container {
-    position: fixed;
-  }
+  position: fixed;
+}
   
-  .button-container a:nth-child(2) {
-    margin-bottom: 0;
-  }
+.button-container a:nth-child(2) {
+  margin-bottom: 0;
+}
   
 
 .card-footer{

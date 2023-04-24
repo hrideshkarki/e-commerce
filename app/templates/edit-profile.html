@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1 id="edit-profile-title" align = "center">Edit Profile</h1>
+<div align="center">
 <form class="edit-profile-form" method="POST" align ="center">
     {{ form.hidden_tag() }}
     <span id="edit-first-name-title"><b>First Name: </b></span>
@@ -16,8 +17,9 @@
     {{ form.password(id='edit-password',class='form-control', placeholder='Password') }}
     <span id="edit-confirm-password-title"><b>Confirm Password: </b></span>
     {{ form.confirm_password(id='edit-confirm-password', class='form-control', placeholder='Confirm Password') }}
-    {{ form.submit(class='btn btn-primary edit-submit-btn') }}
+    <button type="button" onclick="window.location.href='/profile'"class="btn btn-primary edit-submit-btn2">Go Back</button>
+    {{ form.submit(class='btn btn-primary edit-submit-btn1') }}
 </form>
-
+</div>
 
 {% endblock %}
