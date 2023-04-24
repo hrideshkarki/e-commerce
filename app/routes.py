@@ -26,6 +26,7 @@ def edit_profile():
     form = EditProfile()
     if request.method == "POST":
         if form.validate():
+            #
             username = form.username.data
             first_name = form.first_name.data
             last_name = form.last_name.data
@@ -35,6 +36,7 @@ def edit_profile():
             user.first_name = first_name
             user.last_name = last_name
             user.email = email
+
             user.password = generate_password_hash(password)
             user.save_changes()
 
@@ -67,7 +69,7 @@ def single_product(id):
     product = Product.query.get(id)
     return render_template('single-product.html', p=product)
 
-@app.route('/add-product/<string:ASIN>')
+@app.route('/add-product/<string:ASIN>', methods = ["GET", "POST"])
 @login_required
 def add_product(ASIN):
     params = {
@@ -83,8 +85,9 @@ def add_product(ASIN):
     data = api_result.json()
 
     if data["request_info"]["success"] == True:
+        flash("Succesfully added product.", 'success')
         product = data["product"]
-
+        
         title = product["title"]
         try:
             price = product["price"]["value"]
@@ -106,8 +109,8 @@ def add_product(ASIN):
                                             # fix this, fix HTML
         return redirect(url_for('admin_add_product'))
     else:
-        flash ('unable to add product', 'danger')
-        return render_template('add-product.html')
+        flash ('Unable to add product.', 'danger')
+        return redirect(url_for('admin_add_product'))
 
 
 @app.route('/remove-item/<int:id>', methods = ["GET", "POST"])
@@ -163,7 +166,6 @@ def admin_add_product():
         form = AddProduct()
         if request.method == "POST":
             if form.validate():
-                flash("Succesfully added product.", 'success')
                 return redirect(url_for('add_product', ASIN=form.ASIN.data.strip()))
             else:
                 flash('Invalid input. Please try again.', 'danger')
