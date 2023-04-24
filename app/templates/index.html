@@ -2,36 +2,40 @@
 {% block content%}
 <div class="container home-container">
     {% if current_user.is_authenticated %}
-    <h1>This will be the homepage if we are logged in</h1>
+    <!-- <h1>This will be the homepage if we are logged in</h1> -->
 
-    {% for p in products %}
-    <a class="card" href=/product/{{p.id}} style="width: 18rem;"> 
-      <img src="{{p.image}}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">{{p.title}}</p>
-        <p class="card-text"><b>${{p.price}}</b></p>
-        {% if current_user.is_admin %}
-        <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
-          <a class="card-text btn btn-warning" href="/remove-item/{{p.id}}">Remove item from store</a>
-        {% elif p.in_cart %}
-            <a class="card-text" href="/remove-from-cart/{{p.id}}">Remove from cart</a>
-        {% else %}
-            <a class="card-text" href="/add-to-cart/{{ p.id }}">Add to cart</a>   
-        {% endif %}   
+    <div class="row" style = "margin-top: 2vw;">
+        {% for p in products %}
+        <div class="col-md-6 mb-4">
+          <div class="card" style="width: 100%;">
+            <img src="{{p.image}}" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{p.title}}</h5>
+              <p class="card-text" align = "center"><b>${{p.price}}</b></p>
+              {% if current_user.is_admin %}
+              <div class="button-container position-relative mt-auto">
+                <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
+                <a class="card-text btn btn-warning " href="/remove-item/{{p.id}}" style="position: absolute; right:0;">Remove item from store</a>
+              </div>
+              {% endif %}
+            </div>
+            {% if not current_user.is_admin %}
+            <div class="card-footer mt-auto">
+              {% if p.in_cart %}
+              <a class="card-text" href="/remove-from-cart/{{p.id}}">Remove from cart</a>
+              {% else %}
+              <a class="card-text" href="/add-to-cart/{{ p.id }}">Add to cart</a>   
+              {% endif %} 
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
       </div>
-    </a>
-  
-    {% endfor %}
-
-
-
-
-
-
 
     {% else %}
-    <h1>This will be the homepage for Guests</h1>
-    <h6>Maybe some other text</h6>
+    <!-- <h1>This will be the homepage for Guests</h1> -->
+    <!-- <h6>Maybe some other text</h6> -->
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">

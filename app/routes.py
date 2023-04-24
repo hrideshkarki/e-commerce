@@ -71,7 +71,7 @@ def single_product(id):
 @login_required
 def add_product(ASIN):
     params = {
-        'api_key': 'C8FA965A8F6D4DDCB9FAC8BC1A5A2B52',
+        'api_key': 'E0C0A5EFD6384338AE3FE195CC2CA4A7',
         'type': 'product',
         'amazon_domain': 'amazon.com'
     }
@@ -226,4 +226,9 @@ def empty_cart():
 def checkout():
     form = CheckoutForm()
     return render_template('checkout.html', form=form)
+
+@app.route('/congrats')
+def congrats():
+    name = current_user.first_name
+    return render_template('congrats.html', name=name)
    
