@@ -3,23 +3,22 @@
 {% block content %}
 <style>
 
-body {
-    background-image: url('/static/img/1.jpg');
-    background-size:1000px;
-    background-repeat: no-repeat;
-    height: 100vh;
-    background-position: center;
-}
+    body {
+        background-image: url('/static/img/1.jpg');
+        background-size:100vw;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 </style>
 
 
 <div class="login-box">
-    <!-- <h1 align = "center">Login</h1> -->
+    <h1 id="login-title" align = "center" >Login</h1>
     <form method="POST" align = "center" >
         {{ form.hidden_tag() }}
 
         <div class="form-group">
-            {{ form.username(class='form-control', placeholder='Username or phone number') }}
+            {{ form.username(class='form-control', style="text-align:left;", placeholder='Username or phone number') }}
         </div>
 
         <div class="form-group">
