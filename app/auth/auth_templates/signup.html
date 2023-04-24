@@ -6,17 +6,16 @@
 
     body {
         background-image: url('/static/img/1.jpg');
-        background-size:1000px;
+        background-size:100vw;
         background-repeat: no-repeat;
-        height: 100vh;
         background-position: center;
     }
     </style>
 
 
 <div class="signup-box">
-    <!-- <h1 align = "center" >Sign up</h1> -->
-    <form method="POST" align = "center">
+    <h1 id="sign-up-title" align = "center" >Sign up</h1>
+    <form method="POST" align="center">
         {{ form.hidden_tag() }}
 
         <div class="form-group">
@@ -28,11 +27,11 @@
         </div>
 
         <div class="form-group">
-        {{ form.username(class='form-control', placeholder='Username') }}
+        {{ form.username(class='form-control', style="text-align:left;", placeholder='Username') }}
         </div>
 
         <div class="form-group">
-            {{ form.email(class='form-control', placeholder='Email or phone number') }}
+            {{ form.email(class='form-control', style="text-align:left;", placeholder='Email or phone number') }}
         </div>
 
         <div class="form-group">
