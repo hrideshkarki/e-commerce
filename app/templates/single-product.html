@@ -13,11 +13,11 @@
       <p class="card-text"><b>About this item</b> <br>{{p.description}}</p>
       
     </div>
-    <div class="col-md-3 mb-6 d-flex justify-content-center align-items-center">
-      <div class="d-flex flex-column">
+    <div class="col-md-3 d-flex justify-content-center align-items-center">
+      <div class="d-flex flex-column ml-auto">
         {% if current_user.is_admin %}
-        <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
-        <a class="card-text btn btn-warning ml-auto" href="/remove-item/{{p.id}}">Remove item from store</a>
+        <a class="card-text btn btn-info"; href="/edit-product/{{p.id}}">Edit Product</a>
+        <a class="card-text btn btn-warning ml-auto" style = "margin-left:;" href="/remove-item/{{p.id}}">Remove from store</a>
         {% elif p.in_cart %}
         <a class="card-text btn btn-warning" href="/remove-from-cart/{{p.id}}"><i class="fas fa-shopping-cart"></i> Remove from cart</a>
         {% else %}
