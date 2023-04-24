@@ -8,6 +8,7 @@ import os
 import requests as r
 from flask import jsonify
 from sqlalchemy import desc
+from email_validator import validate_email
 
 PRODUCT_API_KEY = os.environ.get('PRODUCT_API_KEY')
 
@@ -26,29 +27,56 @@ def edit_profile():
     form = EditProfile()
     if request.method == "POST":
         if form.validate():
-            #
-            username = form.username.data
-            first_name = form.first_name.data
-            last_name = form.last_name.data
-            email = form.email.data
+            username = form.username.data.strip()
+            first_name = form.first_name.data.title().strip()
+            last_name = form.last_name.data.title().strip()
+            email = form.email.data.strip()
             password = form.password.data
-            user.username = username
-            user.first_name = first_name
-            user.last_name = last_name
-            user.email = email
+            
+            if first_name == "" or last_name == "" or username == "":
+                flash('You must enter something for every field. Spaces are not accepted as valid entries', 'danger')
+                return render_template('edit-profile.html', form = form)
+            
+            # if password does not equal confirm password data:
+            if form.password.data != form.confirm_password.data:
+                flash("The password you entered was not correctly confirmed. Please make sure you type the same password twice.", "danger")      
+                return render_template('signup.html', form = form)
 
-            user.password = generate_password_hash(password)
-            user.save_changes()
+            try:
+                validation = validate_email(email)
+                email = validation.email
+            except: 
+                #invalid email
+                flash("The email you are trying to submit is not a properly formatted email.", "danger")
+                return render_template('edit-profile.html', form = form)
+            
+            email_already_exists = User.query.filter_by(email=email).first()
 
-            flash("Succesfully updated profile.", 'success')
-            return redirect(url_for('profile'))
+            if email_already_exists == current_user:
+                username_already_exists = User.query.filter_by(username=username).first()
+                if username_already_exists != None and username_already_exists != current_user:
+                    flash("That username is taken. Please choose a different username.", "danger")
+                else:
+                    #save changes for user
+                    user.username = username
+                    user.first_name = first_name
+                    user.last_name = last_name
+                    user.email = email
+                    user.password = generate_password_hash(password)
+                    user.save_changes()
+
+                    flash("Succesfully updated profile.", 'success')
+                    return redirect(url_for('profile'))
+            else:
+                flash('A user with that email already exists. Try entering a new email.', "danger")
         else:
             flash('Invalid input. Please try again.', 'danger')
-            return render_template('edit-profile.html', form = form)
-        
+            return render_template('edit-profile.html', form = form)  
     elif request.method == "GET":
         return render_template('edit-profile.html', form = form)
-    
+    return render_template('edit-profile.html', form = form)
+
+
 @app.route('/products', methods = ["GET", "POST"], defaults={'department': None})
 @app.route('/products/<string:department>', methods = ["GET", "POST"])
 def products_page(department):
@@ -59,6 +87,7 @@ def products_page(department):
         products = Product.query.filter_by(department = department)
     else:
         products = Product.query.all()
+
     departments_list = [product.department for product in products_dist]
     return render_template('products.html', products=products, departments_list=departments_list)
 
@@ -79,15 +108,11 @@ def add_product(ASIN):
     }
 
     params['asin']= ASIN
-
     api_result = r.get('https://api.rainforestapi.com/request', params)
-    
     data = api_result.json()
-
     if data["request_info"]["success"] == True:
         flash("Succesfully added product.", 'success')
         product = data["product"]
-        
         title = product["title"]
         try:
             price = product["price"]["value"]
@@ -99,9 +124,9 @@ def add_product(ASIN):
             department = product["categories"][1]["name"]
         amazon_link = product["link"]
         try:
-            description = product["description"]
+            description = product["description"].strip("}{") # added the .strip() after the api trial finished
         except:
-            description = product["feature_bullets"]
+            description = product["feature_bullets"].strip("}{")  # added the .strip() after the api trial finished
         rating = product["rating"]
 
         new_product = Product(title, price, image, department, amazon_link, description, rating)
@@ -129,13 +154,6 @@ def edit_product(id):
 
     form = EditProduct()
     if request.method == "POST":
-
-        # title = form.title.data
-        # description = form.description.data
-        # price = form.price.data
-        # department = form.department.data
-
-        # print(title, description, price,)
         if form.validate():
             title = form.title.data
             description = form.description.data
