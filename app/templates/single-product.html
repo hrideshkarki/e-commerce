@@ -9,16 +9,7 @@
     <div class="col-md-5 mb-3">
       <h5 class="card-title"><b style="font-size: 1.2vw;">{{p.title}}</b></h5>
       <p class="card-text"><b style="font-size: 1.5vw;"> ${{p.price}}</b></p>
-      <p class="card-text"><b>Rating: </b>
-        <span class="star-rating">
-        <span class="filled-stars" style="width: {{p.rating * 20}} %;">
-          ★★★★★
-        </span>
-        <span class="empty-stars">
-          ★★★★★
-        </span>
-      </span>
-      </p>
+      <p class="card-text"><b>Rating: {{p.rating}}</b>
       <p class="card-text"><b>About this item</b> <br>{{p.description}}</p>
       
     </div>
@@ -34,4 +25,21 @@
     </div>
   </div>
 </div>
+<br> <br>
+<div class="smiliar-product"  style="margin-left: 50px;"><h3>People who bought this also bought:</h3></div>
+
+if 
+
+{% for p in products %}
+<div class="col-md-12 mb-3">
+  <div class="card border-0" style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <a href="/product/{{p.id}}"> 
+      <img src="{{p.image}}" class="card-img-top" alt="...">
+    </a>
+    <div class="card-body position-relative">
+      <a class="card-title" href="/product/{{p.id}}" style="color: black">{{p.title}}</a><br>
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}

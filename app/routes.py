@@ -203,15 +203,19 @@ def remove_from_cart(id):
         flash('That item was not found', 'danger')
     
     #return render_template('single-product.html', p=product)
-    return redirect(url_for('single_product', id=id))
+    # return redirect(url_for('cart', id=id))
+    if request.referrer.endswith('/cart'):
+        return redirect(url_for('cart'))
+    else:
+        return redirect(url_for('single_product', id=id))
 
 @app.route('/cart')
 def cart():
     cart = current_user.products
-    total = 0
+    total = 0.0
     for item in cart:
         total += item.price
-    return render_template('cart.html', cart=cart, total=total)
+    return render_template('cart.html', cart=cart, total=("%.2f" % total))
    
 @app.route('/empty-cart')
 def empty_cart():

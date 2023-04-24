@@ -11,6 +11,14 @@
     width: 100%;
 } 
 
+/* footer */
+
+.footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+  }
+
+
 footer {
   width: 100%;
   padding-top: 10px;
@@ -221,15 +229,6 @@ form {
 
 
 
-/* .signup-box {
-    margin-top: 1vw;
-    background-color: #e6eaf4;
-    padding: 20px;
-    max-width: 25vw;
-    margin: 0 auto;
-} */
-
-
 .terms-text {
     font-size: 12px;
     font-family: Arial, sans-serif;
@@ -294,13 +293,6 @@ a:hover{
     text-decoration: none;
     color: #BB4430;
   }
-  
-/* footer */
-
-  .footer {
-    background-color: #f2f2f2;
-    padding: 25px;
-  }
 
   /* rating */
   .star-rating {
@@ -335,16 +327,34 @@ a:hover{
 .cart-container {
     padding-left: 2vw;
     padding-right: 2vw;
+    padding-top: 2vw;
+    /* padding: 0 20px; */
   }
 
-  .cart-container .list-group-item {
+cart-space{
+    padding: 0 30px;
+}
+
+.cart-container .list-group-item {
     padding-top: 20px;
     padding-bottom: 20px;
-  }
+}
+
+.cart-container .list-group-item img {
+margin-right: 20px;
+}
   
-  .cart-container .list-group-item img {
-    margin-right: 20px;
-  }
-  
-  
+
+  /* total for cart */
+
+.cart-total {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    text-align: right;
+    box-sizing: border-box;
+}
   

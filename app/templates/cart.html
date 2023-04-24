@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<cart-space>
 <div class="cart-container">
-    <h1>My Cart</h1>
+    <h2><b>Shopping Cart</b></h2>
 
     {% if cart|length == 0 %}
-    <h6>Your cart is empty.</h6>
+    <div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+        <div class="text-center">
+            <h6>You don't have any items in your cart. Let's get shopping!</h6>
+            <a class="btn btn-info" href="/products">Start Shopping</a>
+        </div>
+    </div>
     {% else %}
     <div class="cart-total text-right mt-3">
         <a href="/empty-cart" class="btn btn-danger mt-3">Empty cart</a>
     </div>
+    <br>
     <ul class="list-group">
         {% for item in cart %}
         <li class="list-group-item">
@@ -30,10 +37,13 @@
         </li>
         {% endfor %}
     </ul>
+    <br>
     <div class="cart-total text-right mt-3">
         <p style="margin-right: 22.8vw;"><b>Total:${{ total }}</b></p>
-        <a href="/checkout" class="btn btn-warning mt-3">Checkout</a>
+        <br> 
+        <a style="margin-right: 22vw;" href="/checkout" class="btn btn-warning mt-3">Checkout</a>
     </div>
     {% endif %}
 </div>
+</cart-space>
 {% endblock %}
