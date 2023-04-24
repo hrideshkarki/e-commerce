@@ -332,7 +332,7 @@ a:hover{
   }
 
 cart-space{
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
 .cart-container .list-group-item {
@@ -358,3 +358,17 @@ margin-right: 20px;
     box-sizing: border-box;
 }
   
+
+.button-container {
+    position: fixed;
+  }
+  
+  .button-container a:nth-child(2) {
+    margin-bottom: 0;
+  }
+  
+
+.card-footer{
+    position:relative;
+    bottom: 0;
+}

@@ -13,22 +13,21 @@
       <p class="card-text"><b>About this item</b> <br>{{p.description}}</p>
       
     </div>
-    <div class="col-md-3 mb-3 d-flex justify-content-center align-items-center">
-      {% if current_user.is_admin %}
-      <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
-      <a class="card-text btn btn-warning" href="/remove-item/{{p.id}}">Remove item from store</a>
-      {% elif p.in_cart %}
-      <a class="card-text btn btn-warning" href="/remove-from-cart/{{p.id}}"><i class="fas fa-shopping-cart"></i> Remove from cart</a>
-      {% else %}
-      <a class="card-text btn btn-primary" href="/add-to-cart/{{ p.id }}"><i class="fas fa-shopping-cart"></i> Add to cart</a>   
-      {% endif %}
+    <div class="col-md-3 mb-6 d-flex justify-content-center align-items-center">
+      <div class="d-flex flex-column">
+        {% if current_user.is_admin %}
+        <a class="card-text btn btn-info" href="/edit-product/{{p.id}}">Edit Product</a>
+        <a class="card-text btn btn-warning ml-auto" href="/remove-item/{{p.id}}">Remove item from store</a>
+        {% elif p.in_cart %}
+        <a class="card-text btn btn-warning" href="/remove-from-cart/{{p.id}}"><i class="fas fa-shopping-cart"></i> Remove from cart</a>
+        {% else %}
+        <a class="card-text btn btn-primary" href="/add-to-cart/{{ p.id }}"><i class="fas fa-shopping-cart"></i> Add to cart</a>   
+        {% endif %}
+      </div>
     </div>
-  </div>
+    
 </div>
 <br> <br>
-<div class="smiliar-product"  style="margin-left: 50px;"><h3>People who bought this also bought:</h3></div>
-
-if 
 
 {% for p in products %}
 <div class="col-md-12 mb-3">
