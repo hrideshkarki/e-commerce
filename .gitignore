@@ -4,3 +4,4 @@ migrations
 color-pallette.txt
 who's-doing-what.txt
 ideas.txt
+.env
