@@ -4,11 +4,16 @@ from .models import db, User
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from .auth.routes import auth
+from .api import api
+from flask_cors import CORS
 # from flask_moment import Moment
+
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
+cors = CORS()
+cors.init_app(app)
 
 db.init_app(app)
 migrate = Migrate(app,db)
@@ -23,7 +28,7 @@ login_manager.login_view = 'login_page'
 
 #register blueprint
 app.register_blueprint(auth)
-
+app.register_blueprint(api)
 
 from . import routes
 from . import models

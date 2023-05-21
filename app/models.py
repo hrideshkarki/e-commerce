@@ -3,6 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 # import requests
 from werkzeug.security import generate_password_hash
+from secrets import token_hex
 
 db = SQLAlchemy()
 
@@ -15,6 +16,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False, default=datetime.utcnow())
     is_admin = db.Column(db.Boolean, default=False)
+    api_token = db.Column(db.String, unique=True)
     # in_cart = db.relationship("Product", secondary = "cart")
     
     # I think we want something more like this
@@ -27,7 +29,8 @@ class User(db.Model, UserMixin):
         self.last_name = last_name
         self.username = username
         self.email = email
-        self.password = generate_password_hash(password)
+        self.password = generate_password_hash(password),
+        self.api_token = token_hex(16)
 
     def add_to_cart(self, product):
         self.products.append(product) 
@@ -51,6 +54,18 @@ class User(db.Model, UserMixin):
     def delete_from_db(self):
         db.session.delete(self)
         db.session.commit()
+
+    def to_dict(self):
+        return {
+            "id" : self.id, 
+            "first_name": self.first_name,
+            "last_name" : self.last_name,
+            "username" : self.username,
+            "email" : self.email,
+            "api_token" : self.api_token,
+        }
+
+
 
 class Product(db.Model, UserMixin):
     # id, title, price, image, department=categories[0], link (to amazon), description, rating

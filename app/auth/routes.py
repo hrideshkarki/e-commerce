@@ -3,18 +3,18 @@ from .forms import LoginForm, SignUpForm
 from ..models import User
 from flask_login import current_user,login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
-from email_validator import validate_email
+# from email_validator import validate_email
 
 auth = Blueprint('auth', __name__, template_folder='auth_templates')
 
 # @auth.route('/')
 # def home_page():
-#     return render_template('index.html')
+# return render_template('index.html')
 
 @auth.route('/signup', methods=["GET", "POST"])
 def signup_page():
     form = SignUpForm()
-    
+ 
     if request.method == 'POST':
         if form.validate():
             first_name = form.first_name.data.title().strip()
@@ -50,7 +50,7 @@ def signup_page():
                     return redirect(url_for('home_page'))
             else:
                 flash('A user with that email already exists. Try entering a new email, or logging in.', "danger")
-    
+                
     # if password does not equal confirm password data:
     if form.password.data != form.confirm_password.data:
         flash("The password you entered was not correctly confirmed. Please make sure you type the same password twice.", "danger")      

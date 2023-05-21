@@ -8,7 +8,7 @@ import os
 import requests as r
 from flask import jsonify
 from sqlalchemy import desc
-from email_validator import validate_email
+# from email_validator import validate_email
 
 PRODUCT_API_KEY = os.environ.get('PRODUCT_API_KEY')
 
